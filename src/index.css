@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-navy: #101c2c;
+  --color-navy-800: #17263a;
+  --color-navy-700: #22344c;
+  --color-gold: #c5a46d;
+  --color-gold-light: #dcc49a;
+  --color-gold-dark: #a8874f;
+  --color-ivory: #f7f7f5;
+  --color-sand: #efebe3;
+  --color-ink: #222222;
+  --color-muted: #6b6f76;
+
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 1s var(--ease-luxe) both;
+  --animate-fade-in: fade-in 1.2s ease both;
+  --animate-slow-zoom: slow-zoom 18s ease-out both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slow-zoom {
+    from { transform: scale(1.12); }
+    to { transform: scale(1); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* Small uppercase gold label used above headings */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.32em] text-gold;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-8 bg-gold;
+  }
+
+  .container-luxe {
+    @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn,
+  .btn-gold,
+  .btn-navy,
+  .btn-outline-light,
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] transition-all duration-500 ease-luxe disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-gold {
+    @apply bg-gold text-navy hover:bg-gold-light;
+  }
+  .btn-navy {
+    @apply bg-navy text-white hover:bg-navy-700;
+  }
+  .btn-outline-light {
+    @apply border border-white/40 text-white hover:border-gold hover:text-gold;
+  }
+  .btn-outline-dark {
+    @apply border border-navy/25 text-navy hover:border-navy hover:bg-navy hover:text-white;
+  }
+
+  .field {
+    @apply w-full border border-navy/15 bg-white px-4 py-3.5 text-[15px] text-ink transition-colors duration-300 placeholder:text-muted/70 focus:border-gold focus:outline-none;
+  }
+  .field-label {
+    @apply mb-2 block text-[11px] font-semibold uppercase tracking-[0.2em] text-navy/70;
+  }
+
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-500 ease-luxe;
+  }
+  .link-underline:hover::after,
+  .link-underline[aria-current='page']::after {
+    @apply origin-left scale-x-100;
+  }
+}
+
+/* Scroll-reveal (toggled by the Reveal component) */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 1s var(--ease-luxe),
+    transform 1s var(--ease-luxe);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Native select arrow replacement */
+select.field {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23101C2C' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
