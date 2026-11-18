@@ -7,7 +7,7 @@ import Reveal from '../components/ui/Reveal'
 import PropertyCard from '../components/property/PropertyCard'
 import { locations, priceOptions, properties, propertyTypes } from '../data/properties'
 import { filterProperties, sortProperties } from '../utils/filterProperties'
-import { formatCompactAED } from '../utils/format'
+import { formatCompactUSD } from '../utils/format'
 import { whatsappLink } from '../data/company'
 import WhatsAppIcon from '../components/ui/WhatsAppIcon'
 
@@ -53,7 +53,7 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
           type="search"
           value={filters.q}
           onChange={(e) => setFilter('q', e.target.value)}
-          placeholder="e.g. penthouse, Saadiyat"
+          placeholder="e.g. penthouse, Brickell"
           className="field !pl-11"
         />
       </div>
@@ -91,7 +91,7 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
           onChange={(e) => setFilter('location', e.target.value)}
           className="field"
         >
-          <option value="">All Abu Dhabi</option>
+          <option value="">All Miami areas</option>
           {locations.map((l) => (
             <option key={l}>{l}</option>
           ))}
@@ -107,7 +107,7 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
             <option value="">No min</option>
             {prices.map((p) => (
               <option key={p} value={p}>
-                {formatCompactAED(p)}
+                {formatCompactUSD(p)}
               </option>
             ))}
           </select>
@@ -120,12 +120,12 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
             <option value="">No max</option>
             {prices.map((p) => (
               <option key={p} value={p}>
-                {formatCompactAED(p)}
+                {formatCompactUSD(p)}
               </option>
             ))}
           </select>
         </div>
-        {filters.purpose === 'rent' && <p className="col-span-2 -mt-1 text-[12px] text-muted">Rental prices are per year.</p>}
+        {filters.purpose === 'rent' && <p className="col-span-2 -mt-1 text-[12px] text-muted">Rental prices are per month.</p>}
       </div>
 
       <Segmented
@@ -182,7 +182,7 @@ export default function PropertiesPage() {
 
   const heading =
     filters.purpose === 'buy' ? 'Properties for Sale' : filters.purpose === 'rent' ? 'Properties for Rent' : 'Our Properties'
-  const where = filters.location ? `in ${filters.location}` : 'in Abu Dhabi'
+  const where = filters.location ? `in ${filters.location}` : 'in Miami'
 
   return (
     <>
@@ -190,13 +190,13 @@ export default function PropertiesPage() {
         title={`${heading} ${where}`}
         description={`Browse ${
           filters.purpose === 'rent' ? 'rental' : filters.purpose === 'buy' ? 'sale' : 'sale and rental'
-        } apartments, villas, townhouses and penthouses ${where} with Ultimate Properties LLC. Filter by price, bedrooms and location.`}
+        } condos, houses, townhouses and penthouses ${where} with Real Estate Miami Life. Filter by price, bedrooms and location.`}
       />
       <PageHero
         eyebrow={filters.purpose ? (filters.purpose === 'buy' ? 'Buy' : 'Rent') : 'Listings'}
         title={`${heading} ${where}`}
-        intro="Search apartments, villas, townhouses and penthouses. Filter by price, bedrooms and community."
-        image="/images/waterfront-towers.webp"
+        intro="Search condos, houses, townhouses and penthouses. Filter by price, bedrooms and neighborhood."
+        image="/images/miami-beach-aerial.webp"
         crumbs={[{ label: 'Properties' }]}
       />
 
@@ -279,7 +279,7 @@ export default function PropertiesPage() {
                       <RotateCcw size={15} /> Reset filters
                     </button>
                     <a
-                      href={whatsappLink('Hello, I am looking for a property in Abu Dhabi. Can you help?')}
+                      href={whatsappLink('Hello, I am looking for a property in Miami. Can you help?')}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-gold"

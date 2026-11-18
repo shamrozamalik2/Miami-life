@@ -103,7 +103,7 @@ export default function Header() {
               <span className="xl:hidden">Call</span>
             </a>
             <a
-              href={whatsappLink('Hello Ultimate Properties, I would like to enquire about a property.')}
+              href={whatsappLink('Hello Miami Life, I would like to enquire about a property.')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold !px-5 !py-3"
@@ -183,7 +183,7 @@ export default function Header() {
             <Phone size={16} /> Call
           </a>
           <a
-            href={whatsappLink('Hello Ultimate Properties, I would like to enquire about a property.')}
+            href={whatsappLink('Hello Miami Life, I would like to enquire about a property.')}
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={open ? 0 : -1}

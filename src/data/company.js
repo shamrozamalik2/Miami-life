@@ -1,35 +1,42 @@
-// Verified company information only. Do not add awards, years, team size or achievements here.
+// Verified business information only (from the Google Business Profile).
+// Do not add awards, years in business, team size, licences or a street address here
+// unless the business confirms them.
 export const company = {
-  name: 'Ultimate Properties LLC',
-  shortName: 'Ultimate Properties',
-  type: 'Real Estate Agency',
-  phoneDisplay: '+971 50 265 6531',
-  phoneHref: 'tel:+971502656531',
-  whatsappNumber: '971502656531',
-  whatsappUrl: 'https://wa.me/971502656531',
-  address: {
-    building: 'Rejlers Abu Dhabi',
-    office: 'Office 302, 3rd Floor',
-    street: 'Hamdan Bin Mohammed Street',
-    area: 'Al Danah, Zone 1',
-    city: 'Abu Dhabi',
-    country: 'United Arab Emirates',
-  },
-  rating: 4.8,
-  reviewCount: 144,
-  mapsSearchUrl:
-    'https://www.google.com/maps/search/?api=1&query=Ultimate+Properties+LLC+Hamdan+Bin+Mohammed+Street+Abu+Dhabi',
-  mapsEmbedUrl:
-    'https://maps.google.com/maps?q=Rejlers%20Abu%20Dhabi%2C%20Hamdan%20Bin%20Mohammed%20Street%2C%20Al%20Danah%2C%20Abu%20Dhabi&z=16&output=embed',
+  name: 'Real Estate Miami Life',
+  shortName: 'Miami Life',
+  type: 'Real Estate Agent',
+  phoneDisplay: '+1 305-792-8404',
+  phoneHref: 'tel:+13057928404',
+  whatsappNumber: '13057928404',
+  whatsappUrl: 'https://wa.me/13057928404',
+  city: 'Miami',
+  region: 'Florida',
+  serviceArea: 'Miami, Florida',
+  rating: '5.0',
+  reviewCount: 23,
+  mapsSearchUrl: 'https://www.google.com/maps/search/?api=1&query=Real+Estate+Miami+Life',
+  // No public street address on the profile: the map shows the Miami area served.
+  mapsEmbedUrl: 'https://maps.google.com/maps?q=Brickell%2C%20Miami%2C%20FL&z=13&output=embed',
 }
 
-export const fullAddress = [
-  company.address.building,
-  company.address.office,
-  company.address.street,
-  company.address.area,
-  `${company.address.city}, UAE`,
-].join(', ')
+/**
+ * Excerpts of public Google reviews, quoted as displayed on the Google Business Profile
+ * (Google truncates long reviews, hence the ellipses). Keep these verbatim.
+ */
+export const reviews = [
+  {
+    author: 'Michael O',
+    text: 'Karina and Carlos were absolutely incredible when it came to finding a place to rent in Miami! If you’re looking to move to Brickell or Downtown, call Karina. She has a wealth of knowledge of not only the area but also the intricacies of …',
+  },
+  {
+    author: 'Shana Vold',
+    text: 'Karina was an amazing help. If anyone is relocating from out of state, I high recommend working with her. I moved from the Midwest for a job, and I had never even been to Miami! I was not familiar with the rental market in South Florida so …',
+  },
+  {
+    author: 'Sean Chowdhari',
+    text: 'My real estate agent Karina is absolutely outstanding. She is exceptionally proficient and enthusiastic about doing her job and looking out for her client’s interests. Karina’s professionalism was apparent right from the start of our work …',
+  },
+]
 
 /** Build a WhatsApp deep link with a pre-filled message. */
 export function whatsappLink(message) {

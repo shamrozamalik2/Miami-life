@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { locations, priceOptions, propertyTypes } from '../../data/properties'
-import { formatCompactAED } from '../../utils/format'
+import { formatCompactUSD } from '../../utils/format'
 
 /** Homepage search: Buy/Rent tabs + key fields, navigates to /properties with query params. */
 export default function PropertySearch() {
@@ -55,7 +55,7 @@ export default function PropertySearch() {
         <label className="bg-white px-6 py-4">
           <span className="field-label !mb-1">Location</span>
           <select value={form.location} onChange={update('location')} className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none">
-            <option value="">All Abu Dhabi</option>
+            <option value="">All Miami areas</option>
             {locations.map((l) => (
               <option key={l}>{l}</option>
             ))}
@@ -82,12 +82,12 @@ export default function PropertySearch() {
           </select>
         </label>
         <label className="bg-white px-6 py-4">
-          <span className="field-label !mb-1">Max Price{purpose === 'rent' ? ' / yr' : ''}</span>
+          <span className="field-label !mb-1">Max Price{purpose === 'rent' ? ' / mo' : ''}</span>
           <select value={form.maxPrice} onChange={update('maxPrice')} className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none">
             <option value="">No limit</option>
             {priceOptions[purpose].map((p) => (
               <option key={p} value={p}>
-                {formatCompactAED(p)}
+                {formatCompactUSD(p)}
               </option>
             ))}
           </select>

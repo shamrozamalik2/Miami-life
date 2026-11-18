@@ -12,22 +12,22 @@ const services = [
   {
     icon: Search,
     title: 'Property search',
-    text: 'Share your requirements — community, budget, size and timing — and we will help you shortlist suitable homes.',
+    text: 'Share your requirements — neighborhood, budget, size and move-in date — and we will help you shortlist suitable homes.',
   },
   {
     icon: KeyRound,
     title: 'Sales',
-    text: 'Support for buyers looking for a home or an investment, from first viewing through to completion.',
+    text: 'Support for buyers looking for a home or an investment, from first viewing through to closing.',
   },
   {
     icon: Handshake,
     title: 'Leasing',
-    text: 'Help finding the right rental and guidance through the tenancy process for apartments, villas and townhouses.',
+    text: 'Help finding the right rental and guidance through the lease process for condos, homes and townhouses.',
   },
   {
     icon: Users,
     title: 'Landlords & sellers',
-    text: 'Considering selling or letting your property? Talk to us about presenting it to the right audience.',
+    text: 'Considering selling or renting out your property? Talk to us about presenting it to the right audience.',
   },
 ]
 
@@ -42,18 +42,18 @@ export default function AboutPage() {
   return (
     <>
       <Seo
-        title="About Us — Real Estate Agency in Al Danah, Abu Dhabi"
-        description="Ultimate Properties LLC is a real estate agency in Al Danah, Abu Dhabi helping clients buy and rent apartments, villas and townhouses. Rated 4.8 on Google from 144 reviews."
+        title="About Us — Miami Real Estate Agent"
+        description="Real Estate Miami Life helps clients buy, rent and relocate in Miami — Brickell, Downtown, Miami Beach and beyond. Rated 5.0 on Google from 23 reviews."
       />
       <PageHero
         eyebrow="About Us"
         title={
           <>
-            Your property partner <em className="text-gold">in Abu Dhabi</em>
+            Your property partner <em className="text-gold">in Miami</em>
           </>
         }
-        intro={`${company.name} is a real estate agency based in Al Danah, Abu Dhabi, helping clients buy and rent property across the capital.`}
-        image="/images/abu-dhabi-grand-mosque.webp"
+        intro={`${company.name} helps clients buy, rent and relocate across Miami — from Brickell and Downtown to the beaches and beyond.`}
+        image="/images/miami-beach-aerial.webp"
         crumbs={[{ label: 'About' }]}
       />
 
@@ -75,8 +75,9 @@ export default function AboutPage() {
                 that is a city apartment, a family villa or an investment.
               </p>
               <p>
-                From our office on {company.address.street} in {company.address.area}, we work with clients looking for
-                homes across Abu Dhabi. You are always welcome to visit us, call, or message us on WhatsApp.
+                Many of our clients are new to the city — relocating for work or moving from out of state — and want
+                someone who knows the neighborhoods and the rental market. Call or message us any time to talk it
+                through.
               </p>
             </Reveal>
             <Reveal className="mt-10 flex flex-wrap items-center gap-6 border-t border-navy/10 pt-8">
@@ -92,8 +93,8 @@ export default function AboutPage() {
 
           <Reveal className="relative">
             <img
-              src="/images/interior-waterview-lounge.webp"
-              alt="Elegant living room with tall windows overlooking the water in Abu Dhabi"
+              src="/images/villa-poolside-living.webp"
+              alt="Bright living room opening onto a pool terrace"
               loading="lazy"
               className="aspect-[4/5] w-full object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
             />

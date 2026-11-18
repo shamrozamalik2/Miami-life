@@ -3,28 +3,28 @@ import { ArrowUpRight } from 'lucide-react'
 import Reveal from '../ui/Reveal'
 import { locations } from '../../data/properties'
 
-/** Local-SEO friendly list of Abu Dhabi communities linking to filtered listings. */
+/** Local-SEO friendly list of Miami neighborhoods linking to filtered listings. */
 export default function Areas() {
   return (
     <section className="relative isolate overflow-hidden bg-navy py-24 sm:py-32">
       <img
-        src="/images/abu-dhabi-grand-mosque.webp"
+        src="/images/miami-skyline-palms.webp"
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="absolute inset-0 -z-20 h-full w-full object-cover opacity-25"
+        className="absolute inset-0 -z-20 h-full w-full object-cover opacity-30"
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy via-navy/90 to-navy/60" />
 
       <div className="container-luxe grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <Reveal>
-          <p className="eyebrow">Abu Dhabi Communities</p>
+          <p className="eyebrow">Miami Neighborhoods</p>
           <h2 className="mt-5 font-display text-[40px] leading-[1.05] text-white sm:text-5xl lg:text-[58px]">
-            Explore the capital, <em className="text-gold">area by area</em>
+            Explore Miami, <em className="text-gold">area by area</em>
           </h2>
           <p className="mt-6 max-w-md text-[15.5px] leading-relaxed text-white/65">
-            From island living on Saadiyat and Al Reem to family neighbourhoods like Khalifa City — browse property
-            by the community you want to call home.
+            From high-rise living in Brickell and Downtown to the beaches, Coconut Grove and family-friendly Pinecrest —
+            browse property by the neighborhood you want to call home.
           </p>
         </Reveal>
 

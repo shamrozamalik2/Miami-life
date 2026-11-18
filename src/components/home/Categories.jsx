@@ -4,24 +4,24 @@ import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
 import { properties, propertyTypes } from '../../data/properties'
 
-const typeIcons = { Apartment: Building2, Villa: Home, Townhouse: Building, Penthouse: Hotel }
+const typeIcons = { Condo: Building2, House: Home, Townhouse: Building, Penthouse: Hotel }
 
 const categories = [
   {
     purpose: 'buy',
     label: 'Buy',
     title: 'Properties for Sale',
-    text: 'Apartments, villas and townhouses for end-users and investors across Abu Dhabi’s most sought-after communities.',
+    text: 'Condos, single-family homes and townhouses for buyers and investors across Miami’s most sought-after neighborhoods.',
     image: '/images/villa-white-pool.webp',
-    alt: 'Contemporary white villa with a private pool',
+    alt: 'Contemporary white home with a private pool',
   },
   {
     purpose: 'rent',
     label: 'Rent',
     title: 'Properties for Rent',
-    text: 'Find the right home on an annual lease — from city apartments on Al Reem Island to family villas with gardens.',
-    image: '/images/interior-waterview-lounge.webp',
-    alt: 'Furnished apartment lounge with tall windows overlooking the water',
+    text: 'Find the right rental — from Brickell and Downtown condos to family homes with a yard. Relocating to Miami? Start here.',
+    image: '/images/living-modern-open.webp',
+    alt: 'Modern open-plan living room with dining area',
   },
 ]
 

@@ -4,10 +4,10 @@ import { whatsappLink } from '../../data/company'
 export default function FloatingWhatsApp() {
   return (
     <a
-      href={whatsappLink('Hello Ultimate Properties, I found you through your website and would like some help.')}
+      href={whatsappLink('Hello Miami Life, I found you through your website and would like some help.')}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with Ultimate Properties on WhatsApp"
+      aria-label="Chat with Real Estate Miami Life on WhatsApp"
       className="group fixed right-5 bottom-5 z-40 flex items-center gap-3 sm:right-8 sm:bottom-8"
     >
       <span className="pointer-events-none hidden translate-x-2 bg-navy px-4 py-2.5 text-[12px] font-semibold tracking-wide whitespace-nowrap text-white opacity-0 shadow-xl transition-all duration-500 ease-luxe group-hover:translate-x-0 group-hover:opacity-100 sm:block">

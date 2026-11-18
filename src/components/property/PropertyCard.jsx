@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Bath, BedDouble, MapPin, Maximize } from 'lucide-react'
 import SampleBadge from '../ui/SampleBadge'
-import { formatArea, formatPrice } from '../../utils/format'
+import { formatArea, formatPrice, placeName } from '../../utils/format'
 
 export default function PropertyCard({ property, priority = false }) {
   const { slug, title, purpose, type, price, location, bedrooms, bathrooms, area, images } = property
@@ -36,7 +36,7 @@ export default function PropertyCard({ property, priority = false }) {
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <p className="flex items-center gap-1.5 text-[12px] font-medium uppercase tracking-[0.16em] text-muted">
           <MapPin size={13} className="text-gold" aria-hidden="true" />
-          {location}, Abu Dhabi
+          {placeName(location)}
         </p>
         <h3 className="mt-3 font-display text-[26px] leading-tight text-navy">
           <Link to={href} className="transition-colors duration-300 hover:text-gold-dark">
@@ -56,8 +56,8 @@ export default function PropertyCard({ property, priority = false }) {
           <li className="flex items-center gap-2 border-x border-navy/10 pl-3">
             <Bath size={16} strokeWidth={1.5} className="text-gold" aria-hidden="true" />
             <span>
-              {bathrooms} <span className="sr-only">bathrooms</span>
-              <span aria-hidden="true">Baths</span>
+              {bathrooms} <span className="sr-only">{bathrooms === 1 ? 'bathroom' : 'bathrooms'}</span>
+              <span aria-hidden="true">{bathrooms === 1 ? 'Bath' : 'Baths'}</span>
             </span>
           </li>
           <li className="flex items-center gap-2 pl-3">

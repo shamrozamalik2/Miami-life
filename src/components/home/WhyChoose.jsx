@@ -4,12 +4,12 @@ import Reveal from '../ui/Reveal'
 import StarRating from '../ui/StarRating'
 import { company } from '../../data/company'
 
-// Only verifiable statements: location, Google rating, services, direct contact.
+// Only statements supported by the Google Business Profile and its public reviews.
 const reasons = [
   {
     icon: MapPin,
-    title: 'Based in Abu Dhabi',
-    text: `Visit us at our office in ${company.address.area} on ${company.address.street} — local knowledge, face-to-face meetings.`,
+    title: 'Miami local knowledge',
+    text: 'From Brickell and Downtown to the beaches and the suburbs — get guidance from people who know the neighborhoods.',
   },
   {
     icon: Star,
@@ -18,13 +18,13 @@ const reasons = [
   },
   {
     icon: KeyRound,
-    title: 'Buying & renting under one roof',
-    text: 'Whether you are purchasing a home, investing, or looking for an annual rental, we can help you with both.',
+    title: 'Renting, buying & relocating',
+    text: 'Moving from out of state or finding your first Miami rental? We help you understand the market and your options.',
   },
   {
     icon: MessageCircle,
     title: 'Talk to us directly',
-    text: 'Call or message our team on WhatsApp to discuss your requirements and arrange viewings at a time that suits you.',
+    text: 'Call or message us to discuss your budget and requirements and arrange viewings at a time that suits you.',
   },
 ]
 
@@ -35,14 +35,14 @@ export default function WhyChoose() {
         <Reveal className="relative order-2 lg:order-1">
           <div className="absolute -top-6 -left-6 hidden h-full w-full border border-gold/30 sm:block" />
           <img
-            src="/images/waterfront-towers.webp"
-            alt="Waterfront residential towers and landscaped promenade in Abu Dhabi at sunset"
+            src="/images/miami-beach-condos.webp"
+            alt="Beachfront condo towers framed by palm trees in Miami Beach"
             loading="lazy"
             className="relative aspect-[4/5] w-full object-cover sm:aspect-[6/5]"
           />
           <div className="absolute right-0 -bottom-8 bg-gold p-7 text-navy sm:-right-8 sm:p-9">
             <p className="font-display text-6xl leading-none">{company.rating}</p>
-            <StarRating rating={company.rating} size={14} className="mt-3 [&_.text-gold]:!text-navy [&_.fill-gold]:!fill-navy" />
+            <StarRating rating={company.rating} size={14} className="mt-3 [&_.fill-gold]:!fill-navy [&_.text-gold]:!text-navy" />
             <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em]">{company.reviewCount} Google reviews</p>
           </div>
         </Reveal>
@@ -50,13 +50,13 @@ export default function WhyChoose() {
         <div className="order-1 lg:order-2">
           <SectionHeading
             light
-            eyebrow="Why Ultimate Properties"
+            eyebrow="Why Miami Life"
             title={
               <>
-                A local partner for your <em className="text-gold">next move</em>
+                A local partner for your <em className="text-gold">Miami move</em>
               </>
             }
-            intro="Finding the right property is about more than listings. It is about understanding what you need and having someone in Abu Dhabi you can rely on."
+            intro="Finding the right property is about more than listings. It is about understanding what you need and having someone in Miami who looks out for your interests."
           />
           <ul className="mt-12 grid gap-px bg-white/10 sm:grid-cols-2">
             {reasons.map(({ icon: Icon, title, text }, i) => (

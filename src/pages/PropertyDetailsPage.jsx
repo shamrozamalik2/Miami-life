@@ -32,7 +32,7 @@ import InquiryForm from '../components/property/InquiryForm'
 import PropertyCard from '../components/property/PropertyCard'
 import { getPropertyBySlug, properties } from '../data/properties'
 import { company, whatsappLink } from '../data/company'
-import { formatArea, formatPrice } from '../utils/format'
+import { formatArea, formatPrice, placeName } from '../utils/format'
 import NotFoundPage from './NotFoundPage'
 
 const amenityIcon = (name) => {
@@ -40,12 +40,13 @@ const amenityIcon = (name) => {
   if (n.includes('pool') || n.includes('beach')) return Waves
   if (n.includes('sea view') || n.includes('view')) return Eye
   if (n.includes('gym') || n.includes('padel')) return Dumbbell
-  if (n.includes('parking')) return Car
-  if (n.includes('garden') || n.includes('park')) return Trees
-  if (n.includes('security')) return ShieldCheck
+  if (n.includes('parking') || n.includes('garage')) return Car
+  if (n.includes('garden') || n.includes('park') || n.includes('yard')) return Trees
+  if (n.includes('security') || n.includes('doorman') || n.includes('windows')) return ShieldCheck
   if (n.includes('terrace') || n.includes('balcony')) return Sun
-  if (n.includes('cinema')) return Clapperboard
-  if (n.includes('majlis') || n.includes('study')) return Sofa
+  if (n.includes('elevator')) return Building2
+  if (n.includes('cinema') || n.includes('media')) return Clapperboard
+  if (n.includes('office') || n.includes('study')) return Sofa
   if (n.includes('smart') || n.includes('concierge')) return Sparkles
   if (n.includes('room') || n.includes('wardrobe')) return Home
   if (n.includes('play')) return Fence
@@ -73,15 +74,15 @@ export default function PropertyDetailsPage() {
   ]
 
   const waMessage = `Hello, I'm interested in ${title} in ${location} (ref ${id}). Could you share more details?`
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(`${location}, Abu Dhabi`)}&z=13&output=embed`
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(`${placeName(location)}, FL`)}&z=13&output=embed`
 
   return (
     <>
       <Seo
-        title={`${title} — ${location}, Abu Dhabi`}
-        description={`${type} ${purpose === 'buy' ? 'for sale' : 'for rent'} in ${location}, Abu Dhabi: ${bedrooms} bedrooms, ${bathrooms} bathrooms, ${formatArea(
+        title={`${title} — ${placeName(location)}`}
+        description={`${type} ${purpose === 'buy' ? 'for sale' : 'for rent'} in ${placeName(location)}: ${bedrooms} bedrooms, ${bathrooms} bathrooms, ${formatArea(
           area,
-        )}. ${formatPrice(price, purpose)}. Sample listing by Ultimate Properties LLC.`}
+        )}. ${formatPrice(price, purpose)}. Sample listing by Real Estate Miami Life.`}
         image={images[0].src}
         type="article"
       />
@@ -129,12 +130,12 @@ export default function PropertyDetailsPage() {
               </h1>
               <p className="mt-4 flex items-center gap-2 text-[15px] text-white/70">
                 <MapPin size={16} className="text-gold" aria-hidden="true" />
-                {location}, Abu Dhabi
+                {placeName(location)}
               </p>
             </div>
             <div className="animate-fade-up [animation-delay:150ms] lg:text-right">
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/50">
-                {purpose === 'buy' ? 'Asking price' : 'Annual rent'}
+                {purpose === 'buy' ? 'Asking price' : 'Monthly rent'}
               </p>
               <p className="mt-2 font-display text-4xl text-gold sm:text-5xl">{formatPrice(price, purpose)}</p>
             </div>
@@ -188,17 +189,17 @@ export default function PropertyDetailsPage() {
 
               <Reveal className="mt-14">
                 <p className="eyebrow">Location</p>
-                <h2 className="mt-4 font-display text-3xl text-navy">{location}, Abu Dhabi</h2>
+                <h2 className="mt-4 font-display text-3xl text-navy">{placeName(location)}</h2>
                 <div className="mt-6 aspect-[16/9] overflow-hidden bg-sand">
                   <iframe
-                    title={`Map of ${location}, Abu Dhabi`}
+                    title={`Map of ${placeName(location)}`}
                     src={mapSrc}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     className="h-full w-full border-0 grayscale-[30%]"
                   />
                 </div>
-                <p className="mt-3 text-[12px] text-muted">Map shows the general community area, not an exact address.</p>
+                <p className="mt-3 text-[12px] text-muted">Map shows the general neighborhood, not an exact address.</p>
               </Reveal>
 
               <div className="mt-14 flex items-start gap-3 border-l-2 border-gold bg-white px-5 py-4 text-[13.5px] leading-relaxed text-ink/80">

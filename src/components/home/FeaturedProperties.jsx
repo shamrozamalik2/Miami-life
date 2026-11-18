@@ -17,7 +17,7 @@ export default function FeaturedProperties() {
                 Homes worth <em className="text-gold-dark">a closer look</em>
               </>
             }
-            intro="A selection of sample listings showing how apartments, villas and penthouses across Abu Dhabi can be presented to buyers and tenants."
+            intro="A selection of sample listings showing how condos, homes and penthouses across Miami can be presented to buyers and tenants."
           />
           <Reveal>
             <Link to="/properties" className="btn-outline-dark shrink-0">

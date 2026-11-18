@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SITE = 'Ultimate Properties LLC'
+const SITE = 'Real Estate Miami Life'
 
 function setMeta(attr, key, content) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -16,9 +16,9 @@ function setMeta(attr, key, content) {
  * Per-page SEO: updates <title>, description, Open Graph and Twitter tags.
  * Updates the tags defined in index.html instead of appending duplicates.
  */
-export default function Seo({ title, description, image = '/images/hero-tower.webp', type = 'website' }) {
+export default function Seo({ title, description, image = '/images/miami-brickell-aerial.webp', type = 'website' }) {
   useEffect(() => {
-    const fullTitle = title ? `${title} | ${SITE}` : `${SITE} | Real Estate Agency in Abu Dhabi`
+    const fullTitle = title ? `${title} | ${SITE}` : `${SITE} | Real Estate Agent in Miami, FL`
     document.title = fullTitle
     if (description) {
       setMeta('name', 'description', description)

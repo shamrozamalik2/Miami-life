@@ -45,7 +45,7 @@ export default function InquiryForm({ property, dark = false, compact = false })
   const fieldCls = `field ${dark ? '!border-white/15 !bg-white/5 !text-white placeholder:!text-white/35' : ''}`
   const waMessage = property
     ? `Hello, I'm interested in ${property.title} in ${property.location} (ref ${property.id}).`
-    : 'Hello Ultimate Properties, I would like to enquire about a property.'
+    : 'Hello Miami Life, I would like to enquire about a property.'
 
   if (status === 'sent') {
     return (
@@ -119,7 +119,7 @@ export default function InquiryForm({ property, dark = false, compact = false })
             aria-invalid={!!errors.phone}
             aria-describedby={errors.phone ? `${uid}-phone-err` : undefined}
             className={fieldCls}
-            placeholder="+971"
+            placeholder="+1 (305)"
           />
           {errors.phone && (
             <p id={`${uid}-phone-err`} className="mt-1.5 text-[13px] text-red-500">

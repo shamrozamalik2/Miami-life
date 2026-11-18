@@ -12,8 +12,8 @@ export default function HomePage() {
   return (
     <>
       <Seo
-        title="Real Estate Agency in Abu Dhabi — Buy & Rent Property"
-        description="Find your perfect property in Abu Dhabi with Ultimate Properties LLC. Apartments, villas and townhouses to buy or rent. Office in Al Danah, Abu Dhabi. Rated 4.8 on Google."
+        title="Miami Real Estate Agent — Buy & Rent in Brickell, Downtown & Beyond"
+        description="Find your perfect property in Miami with Real Estate Miami Life. Condos, houses and townhouses to buy or rent in Brickell, Downtown Miami, Miami Beach and more. Rated 5.0 on Google."
       />
       <Hero />
       <SearchSection />

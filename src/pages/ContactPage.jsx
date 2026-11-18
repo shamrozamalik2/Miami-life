@@ -19,16 +19,16 @@ export default function ContactPage() {
       icon: WhatsAppIcon,
       label: 'WhatsApp',
       value: company.phoneDisplay,
-      href: whatsappLink('Hello Ultimate Properties, I would like to enquire about a property.'),
+      href: whatsappLink('Hello Miami Life, I would like to enquire about a property.'),
       action: 'Start a chat',
       external: true,
     },
     {
       icon: MapPin,
-      label: 'Visit our office',
-      value: `${company.address.office}, ${company.address.building}`,
+      label: 'Find us on Google',
+      value: company.serviceArea,
       href: company.mapsSearchUrl,
-      action: 'Get directions',
+      action: 'View profile & reviews',
       external: true,
     },
   ]
@@ -36,8 +36,8 @@ export default function ContactPage() {
   return (
     <>
       <Seo
-        title="Contact Us — Real Estate Agent in Al Danah, Abu Dhabi"
-        description="Contact Ultimate Properties LLC: call or WhatsApp +971 50 265 6531, or visit Office 302, Rejlers Abu Dhabi, Hamdan Bin Mohammed Street, Al Danah, Abu Dhabi."
+        title="Contact Us — Miami Real Estate Agent"
+        description="Contact Real Estate Miami Life: call +1 305-792-8404 or send an enquiry about buying, renting or relocating in Brickell, Downtown Miami, Miami Beach and beyond."
       />
       <PageHero
         eyebrow="Contact"
@@ -46,8 +46,8 @@ export default function ContactPage() {
             Let’s talk about <em className="text-gold">your next property</em>
           </>
         }
-        intro="Call, message us on WhatsApp, or send an enquiry below. You are also welcome to visit our office in Al Danah."
-        image="/images/interior-skyline-living.webp"
+        intro="Call, message us, or send an enquiry below — whether you are buying, renting or relocating to Miami."
+        image="/images/miami-skyline-palms.webp"
         crumbs={[{ label: 'Contact' }]}
       />
 
@@ -92,7 +92,7 @@ export default function ContactPage() {
           <Reveal delay={150} className="flex flex-col">
             <div className="relative aspect-[4/3] overflow-hidden bg-sand lg:aspect-auto lg:flex-1">
               <iframe
-                title="Map showing Ultimate Properties LLC office location in Al Danah, Abu Dhabi"
+                title="Map of Brickell and Downtown Miami, the area served by Real Estate Miami Life"
                 src={company.mapsEmbedUrl}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -100,24 +100,20 @@ export default function ContactPage() {
               />
             </div>
             <div className="bg-navy p-8 text-white/75 sm:p-10">
-              <h3 className="font-display text-3xl text-white">Our office</h3>
+              <h3 className="font-display text-3xl text-white">Where we work</h3>
               <address className="mt-5 flex gap-3 text-[15px] not-italic leading-relaxed">
                 <MapPin size={18} className="mt-1 shrink-0 text-gold" aria-hidden="true" />
                 <span>
                   {company.name}
                   <br />
-                  {company.address.building}, {company.address.office}
+                  Serving Brickell, Downtown Miami, Miami Beach
                   <br />
-                  {company.address.street}
-                  <br />
-                  {company.address.area}, {company.address.city}
-                  <br />
-                  {company.address.country}
+                  and neighborhoods across {company.serviceArea}
                 </span>
               </address>
               <p className="mt-4 flex gap-3 text-[14px] text-white/55">
                 <Clock size={17} className="mt-0.5 shrink-0 text-gold" aria-hidden="true" />
-                Please call ahead to arrange a meeting at the office.
+                Please call ahead to arrange a meeting or viewing.
               </p>
               <a
                 href={company.mapsSearchUrl}

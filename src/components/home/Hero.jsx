@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Mobile / tablet: full-bleed background image */}
       <div className="absolute inset-0 -z-10 lg:hidden">
         <img
-          src="/images/hero-tower.webp"
+          src="/images/miami-brickell-aerial.webp"
           alt=""
           aria-hidden="true"
           fetchPriority="high"
@@ -22,13 +22,13 @@ export default function Hero() {
         {/* Copy */}
         <div className="relative flex items-center">
           <div className="w-full px-5 pt-44 pb-40 sm:px-8 lg:mr-0 lg:ml-auto lg:max-w-[700px] lg:px-12 lg:pt-40 lg:pb-48">
-            <p className="eyebrow animate-fade-up">Real Estate Agency · Abu Dhabi</p>
+            <p className="eyebrow animate-fade-up">Real Estate Agent · Miami, Florida</p>
             <h1 className="mt-7 animate-fade-up font-display text-[52px] leading-[0.98] font-normal tracking-[-0.015em] text-white [animation-delay:120ms] sm:text-7xl xl:text-[92px]">
-              Find Your <em className="text-gold">Perfect Property</em> in Abu Dhabi
+              Find Your <em className="text-gold">Perfect Property</em> in Miami
             </h1>
             <p className="mt-8 max-w-lg animate-fade-up text-[17px] leading-relaxed text-white/75 [animation-delay:240ms]">
-              Whether you are buying your first home, investing, or searching for the right rental, our Abu Dhabi
-              team helps you shortlist suitable properties and guides you through every step.
+              Buying, renting or relocating to Miami? We help you find the right home in Brickell, Downtown and
+              beyond — and guide you through every step, from the first viewing to the keys.
             </p>
             <div className="mt-10 flex animate-fade-up flex-col gap-3 [animation-delay:360ms] sm:flex-row sm:gap-4">
               <Link to="/properties" className="btn-gold">
@@ -61,8 +61,8 @@ export default function Hero() {
         <div className="relative hidden lg:block">
           <div className="absolute inset-0 overflow-hidden">
             <img
-              src="/images/hero-tower.webp"
-              alt="Luxury residential tower with garden terraces overlooking the water and Abu Dhabi skyline"
+              src="/images/miami-brickell-aerial.webp"
+              alt="Aerial view of Brickell condo towers on Biscayne Bay, Miami"
               fetchPriority="high"
               className="h-full w-full animate-slow-zoom object-cover"
             />
@@ -71,12 +71,12 @@ export default function Hero() {
 
           <figure className="absolute bottom-40 -left-16 w-[300px] animate-fade-up border border-gold/40 bg-navy/80 p-3 backdrop-blur-md [animation-delay:700ms] xl:w-[340px]">
             <img
-              src="/images/interior-skyline-living.webp"
-              alt="Bright living room with floor-to-ceiling windows and Abu Dhabi skyline views"
+              src="/images/living-modern-open.webp"
+              alt="Modern open-plan condo living and dining room"
               className="aspect-[16/10] w-full object-cover"
             />
             <figcaption className="flex items-center justify-between px-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
-              Apartments · Villas · Townhouses
+              Condos · Homes · Rentals
             </figcaption>
           </figure>
         </div>
