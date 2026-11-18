@@ -1,36 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { motion } from 'motion/react'
+import { easeLuxe } from '../motion/ease'
 
-/** Fades + lifts children into view once when scrolled into the viewport. */
-export default function Reveal({ as: Tag = 'div', delay = 0, className = '', children, ...rest }) {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+const cache = {}
+const motionTag = (tag) => (cache[tag] ??= motion.create(tag))
 
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-    if (!('IntersectionObserver' in window)) {
-      setVisible(true)
-      return
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Also reveal anything already scrolled past (e.g. after a fast jump or anchor link)
-        if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
-
+/** Fades and lifts children into view once, when scrolled into the viewport. */
+export default function Reveal({ as = 'div', delay = 0, y = 36, className = '', children, ...rest }) {
+  const Tag = motionTag(as)
   return (
     <Tag
-      ref={ref}
-      className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+      transition={{ duration: 1, ease: easeLuxe, delay: delay / 1000 }}
+      className={className}
       {...rest}
     >
       {children}

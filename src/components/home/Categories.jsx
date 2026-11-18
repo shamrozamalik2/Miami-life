@@ -44,6 +44,7 @@ export default function Categories() {
             <Reveal key={c.purpose} delay={i * 150}>
               <Link
                 to={`/properties?purpose=${c.purpose}`}
+                data-cursor="Browse"
                 className="group relative block aspect-[4/5] overflow-hidden bg-navy sm:aspect-[16/11]"
               >
                 <img

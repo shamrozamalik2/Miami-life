@@ -25,7 +25,7 @@ export default function PropertySearch() {
   }
 
   return (
-    <div className="bg-white shadow-[0_40px_80px_-40px_rgba(16,28,44,0.45)]">
+    <div className="bg-white shadow-[0_40px_80px_-40px_rgba(14,14,16,0.45)]">
       <div role="tablist" aria-label="Search type" className="flex border-b border-navy/10">
         {[
           ['buy', 'Buy'],
@@ -54,7 +54,11 @@ export default function PropertySearch() {
       <form onSubmit={onSubmit} className="grid gap-px bg-navy/10 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_auto]">
         <label className="bg-white px-6 py-4">
           <span className="field-label !mb-1">Location</span>
-          <select value={form.location} onChange={update('location')} className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none">
+          <select
+            value={form.location}
+            onChange={update('location')}
+            className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none"
+          >
             <option value="">All Miami areas</option>
             {locations.map((l) => (
               <option key={l}>{l}</option>
@@ -63,7 +67,11 @@ export default function PropertySearch() {
         </label>
         <label className="bg-white px-6 py-4">
           <span className="field-label !mb-1">Property Type</span>
-          <select value={form.type} onChange={update('type')} className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none">
+          <select
+            value={form.type}
+            onChange={update('type')}
+            className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none"
+          >
             <option value="">Any type</option>
             {propertyTypes.map((t) => (
               <option key={t}>{t}</option>
@@ -72,7 +80,11 @@ export default function PropertySearch() {
         </label>
         <label className="bg-white px-6 py-4">
           <span className="field-label !mb-1">Bedrooms</span>
-          <select value={form.beds} onChange={update('beds')} className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none">
+          <select
+            value={form.beds}
+            onChange={update('beds')}
+            className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none"
+          >
             <option value="">Any</option>
             {[1, 2, 3, 4, 5].map((n) => (
               <option key={n} value={n}>
@@ -83,7 +95,11 @@ export default function PropertySearch() {
         </label>
         <label className="bg-white px-6 py-4">
           <span className="field-label !mb-1">Max Price{purpose === 'rent' ? ' / mo' : ''}</span>
-          <select value={form.maxPrice} onChange={update('maxPrice')} className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none">
+          <select
+            value={form.maxPrice}
+            onChange={update('maxPrice')}
+            className="w-full appearance-none bg-transparent py-1 text-[15px] text-ink focus:outline-none"
+          >
             <option value="">No limit</option>
             {priceOptions[purpose].map((p) => (
               <option key={p} value={p}>

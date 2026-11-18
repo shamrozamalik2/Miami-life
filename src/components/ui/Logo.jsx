@@ -9,7 +9,7 @@ export default function Logo({ light = true, className = '' }) {
       className={`group inline-flex flex-col items-start leading-none ${className}`}
     >
       <span
-        className={`font-display text-[25px] font-medium tracking-[0.26em] whitespace-nowrap transition-colors duration-500 sm:text-[27px] ${
+        className={`font-display text-[27px] font-normal tracking-[0.2em] whitespace-nowrap transition-colors duration-500 sm:text-[27px] ${
           light ? 'text-white' : 'text-navy'
         }`}
       >

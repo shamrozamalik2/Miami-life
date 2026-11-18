@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react'
+import { useScrollLock } from '../motion/SmoothScroll'
 
 /** Large property gallery with thumbnails, keyboard navigation and full-screen lightbox. */
 export default function Gallery({ images, title }) {
@@ -8,6 +10,7 @@ export default function Gallery({ images, title }) {
   const count = images.length
 
   const go = useCallback((dir) => setIndex((i) => (i + dir + count) % count), [count])
+  useScrollLock(lightbox)
 
   useEffect(() => {
     if (!lightbox) return
@@ -16,10 +19,8 @@ export default function Gallery({ images, title }) {
       if (e.key === 'ArrowRight') go(1)
       if (e.key === 'ArrowLeft') go(-1)
     }
-    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
     }
   }, [lightbox, go])
@@ -96,60 +97,73 @@ export default function Gallery({ images, title }) {
         </div>
       )}
 
-      {lightbox && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${title} — image gallery`}
-          className="fixed inset-0 z-[70] flex animate-fade-in items-center justify-center bg-navy/97 p-4"
-          onClick={() => setLightbox(false)}
-        >
-          <button
-            type="button"
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${title} — image gallery`}
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-navy/97 p-4"
             onClick={() => setLightbox(false)}
-            aria-label="Close gallery"
-            className="absolute top-5 right-5 flex h-12 w-12 items-center justify-center text-white hover:text-gold"
-            autoFocus
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <X size={28} />
-          </button>
-          <img
-            src={current.src}
-            alt={current.alt}
-            className="max-h-[85vh] max-w-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-          {count > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  go(-1)
-                }}
-                aria-label="Previous image"
-                className="absolute left-3 flex h-12 w-12 items-center justify-center text-white hover:text-gold sm:left-8"
-              >
-                <ChevronLeft size={32} strokeWidth={1.2} />
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  go(1)
-                }}
-                aria-label="Next image"
-                className="absolute right-3 flex h-12 w-12 items-center justify-center text-white hover:text-gold sm:right-8"
-              >
-                <ChevronRight size={32} strokeWidth={1.2} />
-              </button>
-            </>
-          )}
-          <p className="absolute bottom-6 left-1/2 w-[90%] -translate-x-1/2 text-center text-[13px] text-white/60">
-            {current.alt}
-          </p>
-        </div>
-      )}
+            <button
+              type="button"
+              onClick={() => setLightbox(false)}
+              aria-label="Close gallery"
+              className="absolute top-5 right-5 flex h-12 w-12 items-center justify-center text-white hover:text-gold"
+              autoFocus
+            >
+              <X size={28} />
+            </button>
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={current.src + index}
+                src={current.src}
+                alt={current.alt}
+                className="max-h-[85vh] max-w-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </AnimatePresence>
+            {count > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    go(-1)
+                  }}
+                  aria-label="Previous image"
+                  className="absolute left-3 flex h-12 w-12 items-center justify-center text-white hover:text-gold sm:left-8"
+                >
+                  <ChevronLeft size={32} strokeWidth={1.2} />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    go(1)
+                  }}
+                  aria-label="Next image"
+                  className="absolute right-3 flex h-12 w-12 items-center justify-center text-white hover:text-gold sm:right-8"
+                >
+                  <ChevronRight size={32} strokeWidth={1.2} />
+                </button>
+              </>
+            )}
+            <p className="absolute bottom-6 left-1/2 w-[90%] -translate-x-1/2 text-center text-[13px] text-white/60">
+              {current.alt}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

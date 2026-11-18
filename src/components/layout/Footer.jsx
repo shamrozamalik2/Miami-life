@@ -15,8 +15,8 @@ export default function Footer() {
         <div className="lg:col-span-4">
           <Logo />
           <p className="mt-7 max-w-sm text-[15px] leading-relaxed">
-            {company.name} is a Miami real estate agent helping clients buy, rent and relocate across Brickell,
-            Downtown Miami and beyond.
+            {company.name} is a Miami real estate agent helping clients buy, rent and relocate across Brickell, Downtown
+            Miami and beyond.
           </p>
           <a
             href={company.mapsSearchUrl}
@@ -58,7 +58,10 @@ export default function Footer() {
           <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3.5 text-[15px] lg:grid-cols-1">
             {locations.slice(0, 6).map((loc) => (
               <li key={loc}>
-                <Link to={`/properties?location=${encodeURIComponent(loc)}`} className="transition-colors hover:text-gold">
+                <Link
+                  to={`/properties?location=${encodeURIComponent(loc)}`}
+                  className="transition-colors hover:text-gold"
+                >
                   {loc}
                 </Link>
               </li>

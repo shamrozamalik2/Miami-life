@@ -3,7 +3,9 @@ import { useSearchParams } from 'react-router-dom'
 import { Info, RotateCcw, Search, SlidersHorizontal, X } from 'lucide-react'
 import Seo from '../components/ui/Seo'
 import PageHero from '../components/ui/PageHero'
-import Reveal from '../components/ui/Reveal'
+import { AnimatePresence, motion } from 'motion/react'
+import { useScrollLock } from '../components/motion/SmoothScroll'
+import { easeLuxe } from '../components/motion/ease'
 import PropertyCard from '../components/property/PropertyCard'
 import { locations, priceOptions, properties, propertyTypes } from '../data/properties'
 import { filterProperties, sortProperties } from '../utils/filterProperties'
@@ -73,7 +75,12 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
         <label htmlFor={uid + '-type'} className="field-label">
           Property type
         </label>
-        <select id={uid + '-type'} value={filters.type} onChange={(e) => setFilter('type', e.target.value)} className="field">
+        <select
+          id={uid + '-type'}
+          value={filters.type}
+          onChange={(e) => setFilter('type', e.target.value)}
+          className="field"
+        >
           <option value="">All types</option>
           {propertyTypes.map((t) => (
             <option key={t}>{t}</option>
@@ -103,7 +110,12 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
           <label htmlFor={uid + '-min'} className="field-label">
             Min price
           </label>
-          <select id={uid + '-min'} value={filters.minPrice} onChange={(e) => setFilter('minPrice', e.target.value)} className="field">
+          <select
+            id={uid + '-min'}
+            value={filters.minPrice}
+            onChange={(e) => setFilter('minPrice', e.target.value)}
+            className="field"
+          >
             <option value="">No min</option>
             {prices.map((p) => (
               <option key={p} value={p}>
@@ -116,7 +128,12 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
           <label htmlFor={uid + '-max'} className="field-label">
             Max price
           </label>
-          <select id={uid + '-max'} value={filters.maxPrice} onChange={(e) => setFilter('maxPrice', e.target.value)} className="field">
+          <select
+            id={uid + '-max'}
+            value={filters.maxPrice}
+            onChange={(e) => setFilter('maxPrice', e.target.value)}
+            className="field"
+          >
             <option value="">No max</option>
             {prices.map((p) => (
               <option key={p} value={p}>
@@ -125,7 +142,9 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
             ))}
           </select>
         </div>
-        {filters.purpose === 'rent' && <p className="col-span-2 -mt-1 text-[12px] text-muted">Rental prices are per month.</p>}
+        {filters.purpose === 'rent' && (
+          <p className="col-span-2 -mt-1 text-[12px] text-muted">Rental prices are per month.</p>
+        )}
       </div>
 
       <Segmented
@@ -157,6 +176,7 @@ function FilterPanel({ filters, setFilter, reset, activeCount }) {
 export default function PropertiesPage() {
   const [params, setParams] = useSearchParams()
   const [drawer, setDrawer] = useState(false)
+  useScrollLock(drawer)
 
   const filters = Object.fromEntries(FILTER_KEYS.map((k) => [k, params.get(k) || '']))
   const sort = params.get('sort') || 'featured'
@@ -181,7 +201,11 @@ export default function PropertiesPage() {
   )
 
   const heading =
-    filters.purpose === 'buy' ? 'Properties for Sale' : filters.purpose === 'rent' ? 'Properties for Rent' : 'Our Properties'
+    filters.purpose === 'buy'
+      ? 'Properties for Sale'
+      : filters.purpose === 'rent'
+        ? 'Properties for Rent'
+        : 'Our Properties'
   const where = filters.location ? `in ${filters.location}` : 'in Miami'
 
   return (
@@ -205,9 +229,9 @@ export default function PropertiesPage() {
           <div className="mb-10 flex items-start gap-3 border-l-2 border-gold bg-white px-5 py-4 text-[13.5px] leading-relaxed text-ink/80">
             <Info size={18} className="mt-0.5 shrink-0 text-gold" aria-hidden="true" />
             <p>
-              <strong className="font-semibold text-navy">Sample listings for demonstration.</strong> The properties below
-              illustrate how listings will appear on the website. They are not current inventory and are not available
-              for sale or rent.
+              <strong className="font-semibold text-navy">Sample listings for demonstration.</strong> The properties
+              below illustrate how listings will appear on the website. They are not current inventory and are not
+              available for sale or rent.
             </p>
           </div>
 
@@ -260,19 +284,30 @@ export default function PropertiesPage() {
               </div>
 
               {results.length > 0 ? (
-                <div className="mt-8 grid gap-7 sm:grid-cols-2 2xl:grid-cols-3">
-                  {results.map((p, i) => (
-                    <Reveal key={p.id} delay={(i % 2) * 100}>
-                      <PropertyCard property={p} priority={i < 2} />
-                    </Reveal>
-                  ))}
-                </div>
+                <motion.div layout className="mt-8 grid gap-7 sm:grid-cols-2 2xl:grid-cols-3">
+                  {/* Cards glide to their new positions when filters or sorting change */}
+                  <AnimatePresence mode="popLayout">
+                    {results.map((p, i) => (
+                      <motion.div
+                        key={p.id}
+                        layout
+                        initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.3 } }}
+                        transition={{ duration: 0.7, ease: easeLuxe, delay: Math.min(i, 6) * 0.06 }}
+                      >
+                        <PropertyCard property={p} priority={i < 2} />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
               ) : (
                 <div className="mt-8 flex flex-col items-center bg-white px-6 py-20 text-center">
                   <Search size={36} strokeWidth={1} className="text-gold" />
                   <h2 className="mt-6 font-display text-3xl text-navy">No properties match your search</h2>
                   <p className="mt-3 max-w-md text-muted">
-                    Try widening your price range or removing a filter — or tell us what you need and we’ll look for you.
+                    Try widening your price range or removing a filter — or tell us what you need and we’ll look for
+                    you.
                   </p>
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <button type="button" onClick={reset} className="btn-navy">
@@ -316,7 +351,7 @@ export default function PropertiesPage() {
               <X size={22} />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto px-6 py-7">
+          <div data-lenis-prevent className="flex-1 overflow-y-auto px-6 py-7">
             <FilterPanel filters={filters} setFilter={setFilter} reset={reset} activeCount={activeCount} />
           </div>
           <div className="border-t border-navy/10 p-5">

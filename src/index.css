@@ -1,18 +1,20 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-navy: #101c2c;
-  --color-navy-800: #17263a;
-  --color-navy-700: #22344c;
-  --color-gold: #c5a46d;
-  --color-gold-light: #dcc49a;
-  --color-gold-dark: #a8874f;
-  --color-ivory: #f7f7f5;
-  --color-sand: #efebe3;
-  --color-ink: #222222;
-  --color-muted: #6b6f76;
+  /* Palette — "Miami Modern". Token names are historical:
+     navy = primary dark (ink black), gold = accent (Miami sunset coral). */
+  --color-navy: #0e0e10;
+  --color-navy-800: #18181b;
+  --color-navy-700: #27272b;
+  --color-gold: #ff6b4a;
+  --color-gold-light: #ff8f74;
+  --color-gold-dark: #c4442a; /* accessible accent for small text on light backgrounds */
+  --color-ivory: #f5f2ee;
+  --color-sand: #ebe5dd;
+  --color-ink: #151515;
+  --color-muted: #6f6a65;
 
-  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-display: 'Instrument Serif', 'Georgia', serif;
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 
   --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
@@ -20,6 +22,8 @@
   --animate-fade-up: fade-up 1s var(--ease-luxe) both;
   --animate-fade-in: fade-in 1.2s ease both;
   --animate-slow-zoom: slow-zoom 18s ease-out both;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
 
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(28px); }
@@ -29,6 +33,14 @@
     from { opacity: 0; }
     to { opacity: 1; }
   }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
   @keyframes slow-zoom {
     from { transform: scale(1.12); }
     to { transform: scale(1); }
@@ -36,8 +48,12 @@
 }
 
 @layer base {
+  html,
+  body {
+    /* guard against any horizontal overflow; clip (unlike hidden) keeps position: sticky working */
+    overflow-x: clip;
+  }
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
   body {
@@ -60,11 +76,16 @@
 @layer components {
   /* Small uppercase gold label used above headings */
   .eyebrow {
-    @apply inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.32em] text-gold;
+    @apply inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.32em] text-gold-dark;
   }
   .eyebrow::before {
     content: '';
-    @apply block h-px w-8 bg-gold;
+    @apply block h-px w-8 bg-current;
+  }
+
+  .bg-navy .eyebrow,
+  .bg-navy\/80 .eyebrow {
+    @apply text-gold;
   }
 
   .container-luxe {
@@ -111,23 +132,10 @@
   }
 }
 
-/* Scroll-reveal (toggled by the Reveal component) */
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition:
-    opacity 1s var(--ease-luxe),
-    transform 1s var(--ease-luxe);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
 /* Native select arrow replacement */
 select.field {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23101C2C' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230E0E10' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
@@ -148,8 +156,8 @@ select.field {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
+  .animate-marquee,
+  .animate-float {
+    animation: none !important;
   }
 }

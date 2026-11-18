@@ -2,6 +2,8 @@ import { KeyRound, MapPin, MessageCircle, Star } from 'lucide-react'
 import SectionHeading from '../ui/SectionHeading'
 import Reveal from '../ui/Reveal'
 import StarRating from '../ui/StarRating'
+import RevealImage from '../motion/RevealImage'
+import CountUp from '../motion/CountUp'
 import { company } from '../../data/company'
 
 // Only statements supported by the Google Business Profile and its public reviews.
@@ -34,16 +36,23 @@ export default function WhyChoose() {
       <div className="container-luxe grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
         <Reveal className="relative order-2 lg:order-1">
           <div className="absolute -top-6 -left-6 hidden h-full w-full border border-gold/30 sm:block" />
-          <img
+          <RevealImage
             src="/images/miami-beach-condos.webp"
             alt="Beachfront condo towers framed by palm trees in Miami Beach"
-            loading="lazy"
-            className="relative aspect-[4/5] w-full object-cover sm:aspect-[6/5]"
+            className="aspect-[4/5] w-full sm:aspect-[6/5]"
           />
           <div className="absolute right-0 -bottom-8 bg-gold p-7 text-navy sm:-right-8 sm:p-9">
-            <p className="font-display text-6xl leading-none">{company.rating}</p>
-            <StarRating rating={company.rating} size={14} className="mt-3 [&_.fill-gold]:!fill-navy [&_.text-gold]:!text-navy" />
-            <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em]">{company.reviewCount} Google reviews</p>
+            <p className="font-display text-6xl leading-none">
+              <CountUp to={company.rating} />
+            </p>
+            <StarRating
+              rating={company.rating}
+              size={14}
+              className="mt-3 [&_.fill-gold]:!fill-navy [&_.text-gold]:!text-navy"
+            />
+            <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em]">
+              {company.reviewCount} Google reviews
+            </p>
           </div>
         </Reveal>
 

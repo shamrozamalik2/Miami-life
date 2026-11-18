@@ -59,8 +59,21 @@ export default function PropertyDetailsPage() {
 
   if (!property) return <NotFoundPage message="This property could not be found. It may have been removed." />
 
-  const { id, title, purpose, type, price, location, bedrooms, bathrooms, area, images, description, amenities, tagline } =
-    property
+  const {
+    id,
+    title,
+    purpose,
+    type,
+    price,
+    location,
+    bedrooms,
+    bathrooms,
+    area,
+    images,
+    description,
+    amenities,
+    tagline,
+  } = property
 
   const similar = properties
     .filter((p) => p.id !== id && (p.purpose === purpose || p.location === location))
@@ -178,7 +191,10 @@ export default function PropertyDetailsPage() {
                   {amenities.map((a) => {
                     const Icon = amenityIcon(a)
                     return (
-                      <li key={a} className="flex items-center gap-4 border border-navy/10 bg-white px-5 py-4 text-[15px]">
+                      <li
+                        key={a}
+                        className="flex items-center gap-4 border border-navy/10 bg-white px-5 py-4 text-[15px]"
+                      >
                         <Icon size={19} strokeWidth={1.4} className="shrink-0 text-gold" aria-hidden="true" />
                         {a}
                       </li>
@@ -221,7 +237,12 @@ export default function PropertyDetailsPage() {
                   Send an enquiry or message us on WhatsApp for details and viewings.
                 </p>
                 <div className="mt-6 grid grid-cols-2 gap-3">
-                  <a href={whatsappLink(waMessage)} target="_blank" rel="noopener noreferrer" className="btn-gold !px-3">
+                  <a
+                    href={whatsappLink(waMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-gold !px-3"
+                  >
                     <WhatsAppIcon className="h-4 w-4" /> WhatsApp
                   </a>
                   <a href={company.phoneHref} className="btn-outline-light !px-3">
@@ -229,7 +250,8 @@ export default function PropertyDetailsPage() {
                   </a>
                 </div>
                 <div className="my-7 flex items-center gap-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40">
-                  <span className="h-px flex-1 bg-white/10" /> or send a message <span className="h-px flex-1 bg-white/10" />
+                  <span className="h-px flex-1 bg-white/10" /> or send a message{' '}
+                  <span className="h-px flex-1 bg-white/10" />
                 </div>
                 <InquiryForm property={property} dark compact />
               </div>

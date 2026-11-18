@@ -5,6 +5,7 @@ import FeaturedProperties from '../components/home/FeaturedProperties'
 import Categories from '../components/home/Categories'
 import WhyChoose from '../components/home/WhyChoose'
 import Reviews from '../components/home/Reviews'
+import Statement from '../components/home/Statement'
 import Areas from '../components/home/Areas'
 import ContactCTA from '../components/home/ContactCTA'
 
@@ -17,6 +18,7 @@ export default function HomePage() {
       />
       <Hero />
       <SearchSection />
+      <Statement />
       <FeaturedProperties />
       <Categories />
       <WhyChoose />

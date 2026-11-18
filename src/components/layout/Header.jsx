@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import { motion, useMotionValueEvent, useScroll } from 'motion/react'
+import { useScrollLock } from '../motion/SmoothScroll'
+import { easeLuxe } from '../motion/ease'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, Phone, X } from 'lucide-react'
 import Logo from '../ui/Logo'
@@ -28,112 +31,112 @@ function useIsActive() {
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
   const isActive = useIsActive()
+  const { scrollY } = useScroll()
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  // Solid background once scrolled; slide away when scrolling down, return when scrolling up
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const prev = scrollY.getPrevious() ?? 0
+    setScrolled(y > 40)
+    setHidden(y > 320 && y > prev + 2)
+    if (y < prev - 2) setHidden(false)
+  })
 
   // Close the mobile menu on navigation
   useEffect(() => setOpen(false), [location.pathname, location.search])
 
-  // Lock scroll while the mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
+  // Lock scroll (native + Lenis) while the mobile menu is open
+  useScrollLock(open)
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* Concept-preview notice */}
-      <div
-        className={`overflow-hidden bg-gold text-navy transition-all duration-500 ease-luxe ${
-          scrolled ? 'max-h-0' : 'max-h-12'
-        }`}
-      >
-        <p className="container-luxe py-2 text-center text-[10.5px] font-semibold uppercase tracking-[0.18em] sm:text-[11px]">
-          Website concept preview · Property listings shown are samples for demonstration
-        </p>
-      </div>
-
-      <div
-        className={`transition-all duration-500 ease-luxe ${
-          scrolled ? 'bg-navy/95 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md' : 'bg-transparent'
-        }`}
-      >
+      <motion.div animate={{ y: hidden && !open ? '-160%' : '0%' }} transition={{ duration: 0.6, ease: easeLuxe }}>
+        {/* Concept-preview notice */}
         <div
-          className={`container-luxe flex items-center justify-between transition-all duration-500 ${
-            scrolled ? 'h-[76px]' : 'h-[92px]'
+          className={`overflow-hidden bg-gold text-navy transition-all duration-500 ease-luxe ${
+            scrolled ? 'max-h-0' : 'max-h-12'
           }`}
         >
-          <Logo />
+          <p className="container-luxe py-2 text-center text-[10.5px] font-semibold uppercase tracking-[0.18em] sm:text-[11px]">
+            Website concept preview · Property listings shown are samples for demonstration
+          </p>
+        </div>
 
-          <nav aria-label="Main navigation" className="hidden lg:block">
-            <ul className="flex items-center gap-9">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    to={item.to}
-                    aria-current={isActive(item.to) ? 'page' : undefined}
-                    className={`link-underline text-[12px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${
-                      isActive(item.to) ? 'text-gold' : 'text-white/85'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <div
+          className={`transition-all duration-500 ease-luxe ${
+            scrolled ? 'bg-navy/95 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md' : 'bg-transparent'
+          }`}
+        >
+          <div
+            className={`container-luxe flex items-center justify-between transition-all duration-500 ${
+              scrolled ? 'h-[76px]' : 'h-[92px]'
+            }`}
+          >
+            <Logo />
 
-          <div className="hidden items-center gap-6 lg:flex">
-            <a
-              href={company.phoneHref}
-              className="flex items-center gap-2 text-[13px] font-medium tracking-wide text-white/85 transition-colors hover:text-gold xl:text-sm"
-            >
-              <Phone size={15} className="text-gold" aria-hidden="true" />
-              <span className="hidden xl:inline">{company.phoneDisplay}</span>
-              <span className="xl:hidden">Call</span>
-            </a>
-            <a
-              href={whatsappLink('Hello Miami Life, I would like to enquire about a property.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold !px-5 !py-3"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              WhatsApp
-            </a>
-          </div>
+            <nav aria-label="Main navigation" className="hidden lg:block">
+              <ul className="flex items-center gap-9">
+                {navItems.map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.to}
+                      aria-current={isActive(item.to) ? 'page' : undefined}
+                      className={`link-underline text-[12px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${
+                        isActive(item.to) ? 'text-gold' : 'text-white/85'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <div className="flex items-center gap-2 lg:hidden">
-            <a
-              href={company.phoneHref}
-              aria-label={`Call ${company.phoneDisplay}`}
-              className="flex h-11 w-11 items-center justify-center text-white transition-colors hover:text-gold"
-            >
-              <Phone size={20} />
-            </a>
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              aria-label="Open menu"
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-              className="flex h-11 w-11 items-center justify-center text-white"
-            >
-              <Menu size={26} strokeWidth={1.5} />
-            </button>
+            <div className="hidden items-center gap-6 lg:flex">
+              <a
+                href={company.phoneHref}
+                className="flex items-center gap-2 text-[13px] font-medium tracking-wide text-white/85 transition-colors hover:text-gold xl:text-sm"
+              >
+                <Phone size={15} className="text-gold" aria-hidden="true" />
+                <span className="hidden xl:inline">{company.phoneDisplay}</span>
+                <span className="xl:hidden">Call</span>
+              </a>
+              <a
+                href={whatsappLink('Hello Miami Life, I would like to enquire about a property.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold !px-5 !py-3"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                WhatsApp
+              </a>
+            </div>
+
+            <div className="flex items-center gap-2 lg:hidden">
+              <a
+                href={company.phoneHref}
+                aria-label={`Call ${company.phoneDisplay}`}
+                className="flex h-11 w-11 items-center justify-center text-white transition-colors hover:text-gold"
+              >
+                <Phone size={20} />
+              </a>
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={open}
+                aria-controls="mobile-menu"
+                className="flex h-11 w-11 items-center justify-center text-white"
+              >
+                <Menu size={26} strokeWidth={1.5} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Mobile menu */}
       <div
@@ -154,7 +157,7 @@ export default function Header() {
             <X size={28} strokeWidth={1.5} />
           </button>
         </div>
-        <nav aria-label="Mobile navigation" className="container-luxe flex-1 overflow-y-auto pt-6">
+        <nav aria-label="Mobile navigation" data-lenis-prevent className="container-luxe flex-1 overflow-y-auto pt-6">
           <ul className="space-y-1">
             {navItems.map((item, i) => (
               <li

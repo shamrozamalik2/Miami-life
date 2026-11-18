@@ -98,7 +98,10 @@ export default function AboutPage() {
               loading="lazy"
               className="aspect-[4/5] w-full object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
             />
-            <div className="absolute -bottom-6 -left-6 hidden h-40 w-40 border border-gold sm:block" aria-hidden="true" />
+            <div
+              className="absolute -bottom-6 -left-6 hidden h-40 w-40 border border-gold sm:block"
+              aria-hidden="true"
+            />
           </Reveal>
         </div>
       </section>
@@ -139,7 +142,12 @@ export default function AboutPage() {
           />
           <ol className="border-t border-navy/10">
             {steps.map(([title, text], i) => (
-              <Reveal as="li" key={title} delay={i * 80} className="grid grid-cols-[60px_1fr] gap-4 border-b border-navy/10 py-8 sm:grid-cols-[90px_1fr]">
+              <Reveal
+                as="li"
+                key={title}
+                delay={i * 80}
+                className="grid grid-cols-[60px_1fr] gap-4 border-b border-navy/10 py-8 sm:grid-cols-[90px_1fr]"
+              >
                 <span className="font-display text-4xl text-gold sm:text-5xl">0{i + 1}</span>
                 <div>
                   <h3 className="font-display text-2xl text-navy sm:text-3xl">{title}</h3>

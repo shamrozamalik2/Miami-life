@@ -52,7 +52,7 @@ export default function ContactPage() {
       />
 
       <section className="relative z-10 -mt-12">
-        <div className="container-luxe grid gap-px bg-navy/10 shadow-[0_30px_60px_-35px_rgba(16,28,44,0.4)] md:grid-cols-3">
+        <div className="container-luxe grid gap-px bg-navy/10 shadow-[0_30px_60px_-35px_rgba(14,14,16,0.4)] md:grid-cols-3">
           {channels.map(({ icon: Icon, label, value, href, action, external }, i) => (
             <Reveal key={label} delay={i * 100} className="bg-white">
               <a

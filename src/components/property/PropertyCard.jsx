@@ -8,8 +8,14 @@ export default function PropertyCard({ property, priority = false }) {
   const href = `/properties/${slug}`
 
   return (
-    <article className="group flex h-full flex-col bg-white transition-shadow duration-700 ease-luxe hover:shadow-[0_30px_60px_-30px_rgba(16,28,44,0.35)]">
-      <Link to={href} className="relative block aspect-[4/3] overflow-hidden bg-sand" tabIndex={-1} aria-hidden="true">
+    <article className="group relative flex h-full flex-col bg-white transition-shadow duration-700 ease-luxe hover:shadow-[0_30px_60px_-30px_rgba(14,14,16,0.35)]">
+      <Link
+        to={href}
+        data-cursor="View"
+        className="relative block aspect-[4/3] overflow-hidden bg-sand"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
         <img
           src={images[0].src}
           alt={images[0].alt}

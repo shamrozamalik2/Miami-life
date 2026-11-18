@@ -4,3 +4,6 @@ dist
 
 # raw source images (optimized copies live in public/images)
 assets/
+
+.env
+.env.local
